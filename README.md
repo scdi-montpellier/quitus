@@ -1,20 +1,21 @@
 # Quitus Alma SCDI
-Application écrite en PHP/JS/CSS pour la génération de quitus dans l'application Alma Exlibris.
+Application écrite en PHP/JS/CSS pour la génération de Quitus dans l'application Alma Exlibris.
 
 ## Fonctionnement de l'application
-L'utilisateur s'authentifie via son identifiant universitaire (SAML shibboleth) qui doit correspondre à un identifiant utilisateur dans Alma. Il peut aussi s'identifier directement avec son identifiant Alma (code-barres) et sa date de naissance.
+L'utilisateur s'authentifie via son identifiant universitaire (SAML shibboleth) qui doit correspondre à un identifiant utilisateur dans Alma. Il peut aussi s'identifier directement avec son identifiant Alma (code-barres en général) et sa date de naissance.
 Si l'utilisateur n'a pas de blocage, de prêts en cours ou en retard, ou d'amende/frais, un mail avec un lien unique peut être envoyé sur le mail principal indiqué dans le compte utilisateur Alma.
-Ce lien valable 24h, permet de télécharger le Quitus sous forme de PDF. Une fois le lien téléchargé, un blocage est créé sur l'utilisateur Alma.
+Ce lien valable 24h, permet de télécharger le Quitus sous forme de PDF. Une fois le Quitus téléchargé, un blocage est créé sur l'utilisateur Alma afin qu'il ne puisse plus faire d'opération sur son compte.
 Le PDF contient un QRCode et un lien vers le serveur "Quitus" pour permettre de vérifier la validité du Quitus (vérifie la présence du code du Blocage sur l'utilisateur Alma).
+Les interactions entre l'application Quitus et Alma sont faites à travers l'API RESTful Alma mis à disposition par Exlibris.
 
 ## Pré-requis :
 - Serveur Apache en HTTPS (testé sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activé 
 - PHP v7.3 (non testé sur PHP v7.4+/8+)
 - Serveur MariaDB v10.3
-- 1 token Developer Network Exlibris pour utiliser l'API Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma)
+- 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma)
 
 ### Autres dépendances :
-JS/CSS (via CDN - lien dans le code) :
+JS/CSS (via CDN - lien en dur dans le code) :
 - utilisation de bootstrap (testé en v4.3) (https://getbootstrap.com/)
 - utilisation de JQuery (testé en v1.12) (https://jquery.com/)
 - utilisation de PopperJS (testé en v1.14) (https://popper.js.org/)
@@ -31,10 +32,10 @@ PHP (installation locale) :
 - Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur)
 - Copier vos logos en png dans le dossier /images et /images/logo_hd -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png
 - Laisser (ou créer) un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
-- Téléchager fpdf et copier les fichiers dans le dossier /fpdf à la racine du site
-- Téléchager phpqrcode et copier les fichiers dans le dossier /phpqrcode à la racine du site
-- Téléchager PHPMailer et copier les fichiers dans le dossier /PHPMailer à la racine du site
-- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (spécifier le chemin de SimpleSAMLPHP dans config.php).
+- Téléchager fpdf et copier les fichiers dans le dossier /fpdf à la racine du site (nom dossier en dur dans le code)
+- Téléchager phpqrcode et copier les fichiers dans le dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
+- Téléchager PHPMailer et copier les fichiers dans le dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
+- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
 
 ## Note
 - Application en français uniquement pour le moment
