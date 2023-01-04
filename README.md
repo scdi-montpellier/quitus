@@ -12,7 +12,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Serveur Apache en HTTPS (testé sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activé 
 - PHP v7.3 (non testé sur PHP v7.4+/8+)
 - Serveur MariaDB v10.3 (non testé sur version supérieure)
-- 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma)
+- 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma, créer un token dans - Manage API Keys - pour l'application Alma avec les bons droits : Users - Read/write)
 
 ### Autres dépendances :
 #### JS/CSS (via CDN - lien en dur dans le code) :
