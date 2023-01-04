@@ -29,7 +29,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 ## Installation
 - Copier tous les fichiers de l'application dans le répertoire root d'apache
 - Modifier le fichier config.php pour paramètrer/personnaliser l'application (chemin, url, titre, logo, serveur base de données, token Alma, serveur smtp, serveurs IDP SAML...) : voir exemple fourni
-- Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur)
+- Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur). Supprimer le fichier quitus.sql du serveur.
 - Copier vos logos en png dans le dossier /images et /images/logo_hd -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png
 - Créer un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
 - Téléchager fpdf et copier les fichiers dans un dossier /fpdf à la racine du site (nom dossier en dur dans le code)
