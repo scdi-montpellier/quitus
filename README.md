@@ -1,46 +1,46 @@
 # Quitus Alma SCDI
-Application écrite en PHP/JS/CSS pour la génération de Quitus dans l'application Alma Exlibris.
+Quitus Alma SCDI est une application Ã©crite en PHP/JS/CSS pour la gÃ©nÃ©ration de Quitus dans l'application Alma Exlibris.
 
 ## Fonctionnement de l'application
-L'utilisateur s'authentifie via son identifiant universitaire (SAML shibboleth) qui doit correspondre à un identifiant utilisateur dans Alma. Il peut aussi s'identifier directement avec son identifiant Alma (code-barres en général) et sa date de naissance.
-Si l'utilisateur n'a pas de blocage, de prêts en cours ou en retard, ou d'amende/frais, un mail avec un lien unique peut être envoyé sur le mail principal indiqué dans le compte utilisateur Alma.
-Ce lien valable 24h, permet de télécharger le Quitus sous forme de PDF. Une fois le Quitus téléchargé, un blocage est créé sur l'utilisateur Alma afin qu'il ne puisse plus faire d'opération sur son compte.
-Le PDF contient un QRCode et un lien vers le serveur "Quitus" pour permettre de vérifier la validité du Quitus (vérifie la présence du code du Blocage sur l'utilisateur Alma).
-Les interactions entre l'application Quitus et Alma sont faites à travers l'API RESTful Alma mis à disposition par Exlibris.
+L'utilisateur s'authentifie via son identifiant universitaire (SAML shibboleth) qui doit correspondre Ã  un identifiant utilisateur dans Alma. Il peut aussi s'identifier directement avec son identifiant Alma (code-barres en gÃ©nÃ©ral) et sa date de naissance.
+Si l'utilisateur n'a pas de blocage, de prÃªts en cours ou en retard, ou d'amende/frais, un mail avec un lien unique peut Ãªtre envoyÃ© sur le mail principal indiquÃ© dans le compte utilisateur Alma.
+Ce lien valable 24h, permet de tÃ©lÃ©charger le Quitus sous forme de PDF. Une fois le Quitus tÃ©lÃ©chargÃ©, un blocage est crÃ©Ã© sur l'utilisateur Alma afin qu'il ne puisse plus faire d'opÃ©ration sur son compte.
+Le PDF contient un QRCode et un lien vers le serveur "Quitus" pour permettre de vÃ©rifier la validitÃ© du Quitus (vÃ©rifie la prÃ©sence du code du Blocage sur l'utilisateur Alma).
+Les interactions entre l'application Quitus et Alma sont faites Ã  travers l'API RESTful Alma mis Ã  disposition par Exlibris.
 
-## Pré-requis :
-- Serveur Apache en HTTPS (testé sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activé 
-- PHP v7.3 (non testé sur PHP v7.4+/8+)
+## PrÃ©-requis :
+- Serveur Apache en HTTPS (testÃ© sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activÃ© 
+- PHP v7.3 (non testÃ© sur PHP v7.4+/8+)
 - Serveur MariaDB v10.3
-- 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma)
+- 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander Ã  exlibris d'associer votre compte developpeur Ã  votre instance Alma)
 
-### Autres dépendances :
-JS/CSS (via CDN - lien en dur dans le code) :
-- utilisation de bootstrap (testé en v4.3) (https://getbootstrap.com/)
-- utilisation de JQuery (testé en v1.12) (https://jquery.com/)
-- utilisation de PopperJS (testé en v1.14) (https://popper.js.org/)
-- utilisation de FontAwesome (testé en v4.7) (https://fontawesome.com/v4/icons/)
-PHP (installation locale) :
-- SimpleSAMLPHP (testé en v1.19) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application Quitus.
-- fpdf (testé en v1.8) : génération du quitus en pdf (http://www.fpdf.org/)
-- phpqrcode (testé en v1.1) : génération d'un qrcode dans le quitus (http://phpqrcode.sourceforge.net/)
-- PHPMailer (testé en v6.0) : envoi de mail pour télécharger le quitus (https://github.com/PHPMailer/PHPMailer)
+### Autres dÃ©pendances :
+#### JS/CSS (via CDN - lien en dur dans le code) :
+- utilisation de bootstrap (testÃ© en v4.3) (https://getbootstrap.com/)
+- utilisation de JQuery (testÃ© en v1.12) (https://jquery.com/)
+- utilisation de PopperJS (testÃ© en v1.14) (https://popper.js.org/)
+- utilisation de FontAwesome (testÃ© en v4.7) (https://fontawesome.com/v4/icons/)
+#### PHP (installation locale) :
+- SimpleSAMLPHP (testÃ© en v1.19) pour l'authentification via SAML (shibboleth) afin de rÃ©cupÃ©rer l'identifiant de l'utilisateur Alma (https://simplesamlphp.org/) : un SP doit Ãªtre installÃ© et fonctionnel pour fonctionner avec l'application Quitus.
+- fpdf (testÃ© en v1.8) : gÃ©nÃ©ration du quitus en pdf (http://www.fpdf.org/)
+- phpqrcode (testÃ© en v1.1) : gÃ©nÃ©ration d'un qrcode dans le quitus (http://phpqrcode.sourceforge.net/)
+- PHPMailer (testÃ© en v6.0) : envoi de mail pour tÃ©lÃ©charger le quitus (https://github.com/PHPMailer/PHPMailer)
 
 ## Installation
-- Copier tous les fichiers de l'application dans le répertoire root d'apache
-- Modifier le fichier config.php pour paramètrer/personnaliser l'application (chemin, url, titre, logo, serveur base de données, token Alma, serveur smtp, serveurs IDP SAML...) : voir exemple fourni
-- Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur)
+- Copier tous les fichiers de l'application dans le rÃ©pertoire root d'apache
+- Modifier le fichier config.php pour paramÃ¨trer/personnaliser l'application (chemin, url, titre, logo, serveur base de donnÃ©es, token Alma, serveur smtp, serveurs IDP SAML...) : voir exemple fourni
+- Importer le script quitus.sql sur votre serveur MariaDB pour crÃ©er la base et la table nÃ©cessaire Ã  l'application (attention Ã  bien mettre les bons droits utilisateur)
 - Copier vos logos en png dans le dossier /images et /images/logo_hd -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png
-- Laisser (ou créer) un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
-- Téléchager fpdf et copier les fichiers dans le dossier /fpdf à la racine du site (nom dossier en dur dans le code)
-- Téléchager phpqrcode et copier les fichiers dans le dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
-- Téléchager PHPMailer et copier les fichiers dans le dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
-- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
+- Laisser (ou crÃ©er) un dossier /temp Ã  la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir Ã©crire dans le dossier)
+- TÃ©lÃ©chager fpdf et copier les fichiers dans le dossier /fpdf Ã  la racine du site (nom dossier en dur dans le code)
+- TÃ©lÃ©chager phpqrcode et copier les fichiers dans le dossier /phpqrcode Ã  la racine du site (nom dossier en dur dans le code)
+- TÃ©lÃ©chager PHPMailer et copier les fichiers dans le dossier /PHPMailer Ã  la racine du site (nom dossier en dur dans le code)
+- TÃ©lÃ©chager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
 
 ## Note
-- Application en français uniquement pour le moment
-- Plusieurs serveurs IDP Shibboleth peuvent être utilisés pour l'authentification des utilisateurs (voir fichier config.php)
+- Application en franÃ§ais uniquement pour le moment
+- Plusieurs serveurs IDP Shibboleth peuvent Ãªtre utilisÃ©s pour l'authentification des utilisateurs (voir fichier config.php)
 
 ## Licence
 Quitus Alma SCDI est un logiciel libre sous license GNU GPL (voir fichier LICENSE / https://www.gnu.org/licenses/).
-Aucun support n'est assuré pour le moment par le SCDI de Montpellier.
+Aucun support n'est assurÃ© pour le moment par le SCDI de Montpellier.
