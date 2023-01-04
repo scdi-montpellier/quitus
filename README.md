@@ -31,10 +31,10 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Modifier le fichier config.php pour paramètrer/personnaliser l'application (chemin, url, titre, logo, serveur base de données, token Alma, serveur smtp, serveurs IDP SAML...) : voir exemple fourni
 - Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur)
 - Copier vos logos en png dans le dossier /images et /images/logo_hd -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png
-- Laisser (ou créer) un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
-- Téléchager fpdf et copier les fichiers dans le dossier /fpdf à la racine du site (nom dossier en dur dans le code)
-- Téléchager phpqrcode et copier les fichiers dans le dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
-- Téléchager PHPMailer et copier les fichiers dans le dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
+- Créer un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
+- Téléchager fpdf et copier les fichiers dans un dossier /fpdf à la racine du site (nom dossier en dur dans le code)
+- Téléchager phpqrcode et copier les fichiers dans un dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
+- Téléchager PHPMailer et copier les fichiers dans un dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
 - Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
 
 ## Note
