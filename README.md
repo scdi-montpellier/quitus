@@ -44,3 +44,9 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 ## Licence
 Quitus Alma SCDI est un logiciel libre sous license GNU GPL (voir fichier LICENSE / https://www.gnu.org/licenses/).
 Aucun support n'est assuré pour le moment par le SCDI de Montpellier.
+
+## Captures
+Accueil :
+![https://quitus.scdi-montpellier.fr/capture/1.png]
+Après authentification :
+![https://quitus.scdi-montpellier.fr/capture/2.png]
