@@ -47,6 +47,6 @@ Aucun support n'est assuré pour le moment par le SCDI de Montpellier.
 
 ## Captures
 - Accueil :
-![Accueil](https://quitus.scdi-montpellier.fr/capture/1.png | width=300)
+![Accueil](https://quitus.scdi-montpellier.fr/capture/1.png =400x250)
 - Après authentification :
-![Après authentification](https://quitus.scdi-montpellier.fr/capture/2.png | width=300)
+![Après authentification](https://quitus.scdi-montpellier.fr/capture/2.png =400x250)
