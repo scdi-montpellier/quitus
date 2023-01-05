@@ -62,8 +62,8 @@
 								
 							if ($maildemande != "")
 							{
-								//!!!!!!!!!!! Pour test et envoi à SLP !!!!!!!!!!!!!!!!
-								// $maildemande = "sebastien.leyreloup@umontpellier.fr";
+								//!!!!!!!!!!! Pour test et envoi à un compte de test !!!!!!!!!!!!!!!!
+								// $maildemande = "xxxxxx.xxxxxxxxxxxx@nomdedomaine.tld";
 								
 								$datelimite = date("Y-m-d H:i:s",strtotime(date("d M Y H:i:s")." + 1 day"));
 								
