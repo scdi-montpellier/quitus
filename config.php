@@ -26,14 +26,12 @@
 	$gURLsiteinstitutionel = "https://www.scdi-montpellier.fr/";
 	
 	// Service d'aide par défaut
-	// URL d'aide par défaut
-	$gAide['default']['nom'] = "Une question ?";
-	$gAide['default']['url'] = "https://www.scdi-montpellier.fr/boomerang";
+	$gAide['default']['nom'] = "Une question ?"; // nom site aide par défaut
+	$gAide['default']['url'] = "https://www.scdi-montpellier.fr/boomerang"; // URL d'aide par défaut
 	
-	// Service d'aide par id IDP
-	// URL d'aide par id IDP					 
-	$gAide['upv']['nom'] = "Une question ? Un.e bibliothécaire vous répond";
-	$gAide['upv']['url'] = "https://bibliotheques.univ-montp3.fr/une-question/";
+	// Service d'aide par id IDP (utiliser le même ID que lors de la définition des serveurs IDP plus bas)			 
+	$gAide['upv']['nom'] = "Une question ? Un.e bibliothécaire vous répond"; // nom site aide dès qu'un serveur IDP est utilisé
+	$gAide['upv']['url'] = "https://bibliotheques.univ-montp3.fr/une-question/"; // URL d'aide dès qu'un serveur IDP est utilisé
 	
 	$gAide['um']['nom'] = "UBIB, un.e bibliothécaire répond à vos questions";
 	$gAide['um']['url'] = "https://ubib.libanswers.com/contactez-nous/";
@@ -41,31 +39,7 @@
 	$gAide['enscm']['nom'] = "UBIB, un.e bibliothécaire répond à vos questions";
 	$gAide['enscm']['url'] = "https://ubib.libanswers.com/contactez-nous/";
 	
-	//chemin vers favicon du site
-	$gURLfavicon = "images/favicon.ico";
-	
-	//chemin vers logo en bas du site
-	$gURLlogo = "images/logo.png";
-	
-	//chemin vers logo HD par défaut dans le PDF du Quitus
-	$gURLlogoHD = "images/logo_hd/scdi.png";
-	
-	//dossier Logo HD dans PDF Quitus sans le '/' de fin -> les images auront la forme : nomdomaine.tld.png ou prefixe_identifiant_alma.png - elles doivent être copiée dans le dossier
-	$gURLlogoHDPdf = "images/logo_hd";
-	
-	//chemin vers image du tampon dans PDF Quitus
-	$gURLtampon = "images/tampon.png";
-	
-	//ville affichée dans PDF Quitus
-	$gURLville = "Montpellier";
-	
-	//Nom ou TAG du blocage dans Alma en MAJUSCULE
-	$gTagblocage = "QUITUS BU";
-	
-	//Nom du SP shibboleth déclaré dans simplesamlphp
-	$gNomSP = "quitus-scdi";
-	
-	// config des serveurs IDP AML
+	// config des serveurs IDP SAML
 	// serveur idp UPV
 	$gIdp['upv']['id']="upv";
 	$gIdp['upv']['server']="urn:mace:cru.fr:federation:univ-montp3.fr"; // Identifiant du serveur IDP
@@ -90,19 +64,46 @@
 	$gIdp['enscm']['buttoncolor']="background-color:#8bc039;border:1px solid #db9d3c;";
 	$gIdp['enscm']['active']=true;
 	
-	// clé de chiffrement opérations générales (32 caractères aléatoires à définir)
+	// chemin vers favicon du site
+	$gURLfavicon = "images/favicon.ico";
+	
+	// chemin vers logo en bas du site
+	$gURLlogo = "images/logo.png";
+	
+	// chemin vers logo HD par défaut dans le PDF du Quitus
+	$gURLlogoHD = "images/logo_hd/scdi.png";
+	
+	// dossier Logo HD dans PDF Quitus sans le '/' de fin
+    //	-> les images auront la forme : nomdomaine.tld.png (domaine de l'attribut eppn retourné par le serveur IDP)
+	//     ou prefixe_identifiant_alma.png (2 ou 3ère lettres de l'identifiant utilisateur Alma)
+	//  -> les logos doivent être copiée dans le dossier sur le serveur
+	$gURLlogoHDPdf = "images/logo_hd";
+	
+	// chemin vers image du tampon dans PDF Quitus
+	$gURLtampon = "images/tampon.png";
+	
+	// Ville affichée dans PDF Quitus
+	$gURLville = "Montpellier";
+	
+	// Nom ou TAG du blocage dans Alma en MAJUSCULE
+	$gTagblocage = "QUITUS BU";
+	
+	// Chemin sur le serveur de SimpleSAMLPhp
+	$gCheminSSP = "/var/simplesamlphp/";
+		
+	// Nom du SP shibboleth/SAML déclaré dans SimpleSAMLPhp
+	$gNomSP = "quitus-scdi";
+	
+	// Clé de chiffrement opérations générales notamment dans les liens uniques (32 caractères aléatoires à définir)
 	$gKey = "12345678912345678912345678912345";
 	
-	// configuration des envois de mail
+	// configuration des envois de mail (utilisation d'un SMTP)
 	$gMailAddFrom = "no-reply@quitus.scdi-montpellier.fr";
 	$gMailNameFrom = "Quitus BU";
 	$gMailSMTP = "smtp.scdi-montpellier.fr";				   
 	
-	// chemin sur le serveur de SimpleSAMLPhp
-	$gCheminSSP = "/var/simplesamlphp/";
-	
-	// information de connexion à la base mysql
-	// importer le script quitus.sql pour créer la base et la table nécessaire au bon fonctionnement de l'application (attention : mettre les bons droits utilisateur)
+	// Information de connexion à la base mysql
+	// importer le script quitus.sql pour créer la base et la table nécessaire au bon fonctionnement de l'application (attention : mettre les bons droits utilisateur), puis supprimer le fichier quitus.sql du serveur
 	$gaSql['user']       = "quitus";
 	$gaSql['password']   = "xxxxxxxxxxxx";
 	$gaSql['db']         = "quitus";
