@@ -24,7 +24,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - SimpleSAMLPHP (testé en v1.19) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application Quitus.
 - fpdf (testé en v1.8) : génération du quitus en pdf (http://www.fpdf.org/)
 - phpqrcode (testé en v1.1) : génération d'un qrcode dans le quitus (http://phpqrcode.sourceforge.net/)
-- PHPMailer (testé en v6.0) : envoi de mail pour télécharger le quitus (https://github.com/PHPMailer/PHPMailer)
+- PHPMailer (testé en v6.0) : envoi de mail pour télécharger le quitus (https://github.com/PHPMailer/PHPMailer). Un serveur d'envoi de mail SMTP doit être disponible (sur port tcp/25 sans chiffrement et authentification) pour pouvoir envoyer le mail de demande de quitus.
 
 ## Installation
 - Copier tous les fichiers de l'application dans le répertoire root d'apache
@@ -37,9 +37,10 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Téléchager PHPMailer et copier les fichiers dans un dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
 - Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis l'interface SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
 
-## Note
+## Notes
 - Application en français uniquement pour le moment
 - Plusieurs serveurs IDP Shibboleth peuvent être utilisés pour l'authentification des utilisateurs (voir fichier config.php)
+- Il n'est pas possible de configurer le port (par défaut : tcp/25), le chiffrement (par défaut : sans) et l'authentification (par défaut : sans) pour le serveur SMTP à utiliser dans config.php
 
 ## Licence
 Quitus Alma SCDI est un logiciel libre sous licence GNU GPL (voir fichier LICENSE / https://www.gnu.org/licenses/).
