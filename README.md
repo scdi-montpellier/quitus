@@ -1,5 +1,5 @@
 # Quitus Alma SCDI
-Quitus Alma SCDI est une application écrite en PHP/JS/CSS qui permet de générer un Quitus en PDF et de bloquer l'utilisateur dans l'application Alma Exlibris.
+**Quitus Alma SCDI** est une application écrite en PHP/JS/CSS qui permet de générer un Quitus en PDF et de bloquer l'utilisateur dans l'application Alma Exlibris.
 
 ## Fonctionnement de l'application
 L'utilisateur s'authentifie via son identifiant universitaire (SAML shibboleth) qui doit correspondre à un identifiant utilisateur dans Alma. Il peut aussi s'identifier directement avec son identifiant Alma (code-barres en général) et sa date de naissance.
