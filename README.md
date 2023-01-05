@@ -42,7 +42,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Plusieurs serveurs IDP Shibboleth peuvent être utilisés pour l'authentification des utilisateurs (voir fichier config.php)
 
 ## Licence
-Quitus Alma SCDI est un logiciel libre sous license GNU GPL (voir fichier LICENSE / https://www.gnu.org/licenses/).
+Quitus Alma SCDI est un logiciel libre sous licence GNU GPL (voir fichier LICENSE / https://www.gnu.org/licenses/).
 Aucun support n'est assuré pour le moment par le SCDI de Montpellier.
 
 ## Captures
