@@ -35,7 +35,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Téléchager fpdf et copier les fichiers dans un dossier /fpdf à la racine du site (nom dossier en dur dans le code)
 - Téléchager phpqrcode et copier les fichiers dans un dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
 - Téléchager PHPMailer et copier les fichiers dans un dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
-- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
+- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis l'interface SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php).
 
 ## Note
 - Application en français uniquement pour le moment
