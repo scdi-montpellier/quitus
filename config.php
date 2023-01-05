@@ -17,7 +17,7 @@
 	// chemin de l'appli sur le serveur
 	$gDossier = "/var/www/html/quitus-scdi/";
 	
-	// Labels institution	  
+	// Labels institution
 	$gNominstitutionelcourt = "BU";
 	$gNominstitutionel = "SCDI de Montpellier";
 	$gNominstitutionelcomplet = "Réseau des Bibliothèques Universitaire de Montpellier";
@@ -25,11 +25,11 @@
 	$gLNominstitutionelcomplet = "le réseau des Bibliothèques Universitaire de Montpellier";
 	$gURLsiteinstitutionel = "https://www.scdi-montpellier.fr/";
 	
-	// Service d'aide par défaut
+	// Service d'aide par défaut : ne pas supprimer	cette entrée 'default'
 	$gAide['default']['nom'] = "Une question ?"; // nom site aide par défaut
 	$gAide['default']['url'] = "https://www.scdi-montpellier.fr/boomerang"; // URL d'aide par défaut
 	
-	// Service d'aide par id IDP (utiliser le même ID que lors de la définition des serveurs IDP plus bas)			 
+	// Service d'aide par ID IDP (utiliser le même ID que lors de la définition des serveurs IDP plus bas)
 	$gAide['upv']['nom'] = "Une question ? Un.e bibliothécaire vous répond"; // nom site aide dès qu'un serveur IDP est utilisé
 	$gAide['upv']['url'] = "https://bibliotheques.univ-montp3.fr/une-question/"; // URL d'aide dès qu'un serveur IDP est utilisé
 	
@@ -39,7 +39,7 @@
 	$gAide['enscm']['nom'] = "UBIB, un.e bibliothécaire répond à vos questions";
 	$gAide['enscm']['url'] = "https://ubib.libanswers.com/contactez-nous/";
 	
-	// config des serveurs IDP SAML
+	// Config des serveurs IDP SAML
 	// serveur idp UPV
 	$gIdp['upv']['id']="upv";
 	$gIdp['upv']['server']="urn:mace:cru.fr:federation:univ-montp3.fr"; // Identifiant du serveur IDP
@@ -48,6 +48,7 @@
 	$gIdp['upv']['buttoncolor']="background-color:#1f73ba;border:1px solid #eeeeee;"; // couleurs du bouton de connexion au serveur IDP
 	$gIdp['upv']['active']=true;  // activer ou désactiver la connexion possible via ce serveur IDP
 	
+	// serveurs IDP supplémentaire :
 	// serveur idp UM
 	$gIdp['um']['id']="um";
 	$gIdp['um']['server']="https://federation.umontpellier.fr/idp/shibboleth";
@@ -90,20 +91,20 @@
 	
 	// Chemin sur le serveur de SimpleSAMLPhp
 	$gCheminSSP = "/var/simplesamlphp/";
-		
+	
 	// Nom du SP shibboleth/SAML déclaré dans SimpleSAMLPhp
 	$gNomSP = "quitus-scdi";
 	
-	// Clé de chiffrement opérations générales notamment dans les liens uniques (32 caractères aléatoires à définir)
+	// Clé de chiffrement opérations générales notamment pour les liens uniques (32 caractères aléatoires à définir)
 	$gKey = "12345678912345678912345678912345";
 	
-	// configuration des envois de mail (utilisation d'un SMTP)
-	$gMailAddFrom = "no-reply@quitus.scdi-montpellier.fr";
+	// Configuration des envois de mail (utilisation d'un serveur SMTP)
+	$gMailAddFrom = "no-reply@xxxxxxxxxxx.tld";
 	$gMailNameFrom = "Quitus BU";
-	$gMailSMTP = "smtp.scdi-montpellier.fr";				   
+	$gMailSMTP = "smtp.xxxxxxxxxxx.tld";				   
 	
 	// Information de connexion à la base mysql
-	// importer le script quitus.sql pour créer la base et la table nécessaire au bon fonctionnement de l'application (attention : mettre les bons droits utilisateur), puis supprimer le fichier quitus.sql du serveur
+	// importer le script quitus.sql pour créer la base et la table nécessaire au bon fonctionnement de l'application (attention : mettre les bons droits utilisateur MariaBD), puis supprimer le fichier quitus.sql du serveur
 	$gaSql['user']       = "quitus";
 	$gaSql['password']   = "xxxxxxxxxxxx";
 	$gaSql['db']         = "quitus";
