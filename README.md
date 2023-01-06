@@ -17,7 +17,8 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 ### Autres dépendances :
 #### JS/CSS (via CDN - lien en dur dans le code) :
 - utilisation de bootstrap (testé en v4.3) (https://getbootstrap.com/)
-- utilisation de JQuery (testé en v1.12) (https://jquery.com/)
+- utilisation de JQuery (testé en v3.4) (https://jquery.com/)
+- utilisation de JQueryUI (testé en v1.12) (https://jqueryui.com//)
 - utilisation de PopperJS (testé en v1.14) (https://popper.js.org/)
 - utilisation de FontAwesome (testé en v4.7) (https://fontawesome.com/v4/icons/)
 #### PHP (installation locale) :
