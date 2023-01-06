@@ -50,9 +50,7 @@ Aucun support n'est assuré pour le moment par le SCDI de Montpellier mais si vo
 
 ## Captures
 - Accueil :
-  
-![Accueil](https://quitus.scdi-montpellier.fr/capture/1.png)
+https://quitus.scdi-montpellier.fr/capture/1.png
 
 - Après authentification :
-  
-![Après authentification](https://quitus.scdi-montpellier.fr/capture/2.png)
+https://quitus.scdi-montpellier.fr/capture/2.png
