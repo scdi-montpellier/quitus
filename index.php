@@ -18,8 +18,9 @@
 	
 	if ($saml_auth->isAuthenticated())
 	{
+		// logout de la session Shibboleth simplesamlphp
 		//$saml_auth->logout(); // ne fonctionne pas sur IDP Unimes et IDP ENSCM... erreur de sécurité
-		// alors on utilise les gros moyens !
+		// alors suuprime la session manuellement
 		setcookie (session_id(), "", time() - 3600);
 		session_destroy();
 		session_write_close();
