@@ -10,7 +10,7 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 
 ## Pré-requis :
 - Serveur Apache en HTTPS (testé sur CentOS v7.9 / Apache v2.4) avec module URLrewriting activé 
-- PHP v7.3 (non testé sur PHP v7.4+/8+)
+- PHP v8.1 (testé OK sur PHP v7.4 et devrait fonctionner sur PHP v8.2)
 - Serveur MariaDB v10.3 (non testé sur version supérieure)
 - 1 token Developer Network Exlibris pour utiliser l'API RESTful Alma Exlibris (https://developers.exlibrisgroup.com/ -> demander à exlibris d'associer votre compte developpeur à votre instance Alma, créer un token dans - Manage API Keys - pour l'application Alma avec les bons droits : Users - Read/write)
 
@@ -22,10 +22,10 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - utilisation de PopperJS (testé en v1.14) (https://popper.js.org/)
 - utilisation de FontAwesome (testé en v4.7) (https://fontawesome.com/v4/icons/)
 #### PHP (installation locale) :
-- SimpleSAMLPHP (testé en v1.19) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application Quitus.
-- fpdf (testé en v1.8) : génération du quitus en pdf (http://www.fpdf.org/)
-- phpqrcode (testé en v1.1) : génération d'un qrcode dans le quitus (http://phpqrcode.sourceforge.net/)
-- PHPMailer (testé en v6.0) : envoi de mail pour télécharger le quitus (https://github.com/PHPMailer/PHPMailer). Un serveur d'envoi de mail SMTP doit être disponible (sur port tcp/25 sans chiffrement et authentification) pour pouvoir envoyer le mail de demande de quitus à l'utilisateur.
+- SimpleSAMLPHP (testé en v1.19.7) pour l'authentification via SAML (shibboleth) afin de récupérer l'identifiant de l'utilisateur Alma (https://simplesamlphp.org/) : un SP doit être installé et fonctionnel pour fonctionner avec l'application Quitus.
+- fpdf (testé en v1.85) : génération du quitus en pdf (http://www.fpdf.org/)
+- phpqrcode (testé en v1.1.4) : génération d'un qrcode dans le quitus (http://phpqrcode.sourceforge.net/)
+- PHPMailer (testé en v6.7.1) : envoi de mail pour télécharger le quitus (https://github.com/PHPMailer/PHPMailer). Un serveur d'envoi de mail SMTP doit être disponible (sur port tcp/25 sans chiffrement et authentification) pour pouvoir envoyer le mail de demande de quitus à l'utilisateur.
 
 ## Installation
 - Copier tous les fichiers de l'application dans le répertoire root d'apache
