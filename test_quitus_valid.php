@@ -84,7 +84,7 @@
 			{
 				$reponse = "OK";
 				$message .= "<div class='alert alert-success' role='alert'>";
-				$message .= "<i class='fa fa-check-square' aria-hidden='true'></i> <b>Ce compte lecteur possède un quitus valide au $datejour</b><br/>$name, carte lecteur $uid, né/née le $datenaissance a rendu tous les documents qu'il/elle avait empruntés et est quitte de toute obligation envers la bibliothèque.";
+				$message .= "<i class='fa fa-check-square' aria-hidden='true'></i> <b>Ce compte lecteur possède un quitus valide au $datejour</b><br/>$name, identifiant carte lecteur $uid, né/née le $datenaissance a rendu tous les documents qu'il/elle avait empruntés et est quitte de toute obligation envers la bibliothèque.";
 				$message .= "</div>";
 			}
 			else

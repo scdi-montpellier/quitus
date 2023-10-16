@@ -17,42 +17,19 @@
 		{
 			
 			global $uid;
-			global $gURLlogoHDPdf;
-			global $gURLlogoHD;
 			global $gNominstitutionelcomplet;
-			$etablissement="";
-			$decalagelogo=33;
+			global $gEtablissement;
+			global $etablissement;
 			
-			// Logo
-			if(filter_var($uid, FILTER_VALIDATE_EMAIL)) 
-			{ // si l'uid est sous forme de mail...
-				$parts = explode('@', $uid);
-				$etablissement=strtolower($parts[1]);
-			}
-			// sinon c'est un code-barres : on prend les 3ère lettres (UM3 : personnels et étudiants Paul-Valéry UMontpellier 3 / UMP : personnel UMontpellier)
-			else
-				$etablissement=strtolower (substr($uid,0,3)); 
+			$decalagelogo=33;
 			
 			if ($etablissement!="")
 			{
-				if (file_exists($gURLlogoHDPdf."/".$etablissement.".png"))
+				if (isset($gEtablissement[$etablissement]['logo_hd']))
 				{
-					$this->Image($gURLlogoHDPdf."/".$etablissement.".png",12,16,25);
-					$decalagelogo=50;
-				}
-				else // logo n'existe pas
-				{
-					// sinon c'est un code-barres : on prend les 2ère lettres (UM : étudiant UMontpellier)
-					$etablissement=strtolower (substr($uid,0,2));
-					
-					if (file_exists($gURLlogoHDPdf."/".$etablissement.".png"))
+					if (file_exists($gEtablissement[$etablissement]['logo_hd']))
 					{
-						$this->Image($gURLlogoHDPdf."/".$etablissement.".png",12,16,25);
-						$decalagelogo=50;
-					}
-					else // logo n'existe pas : on met le logo par défaut
-					{   
-						$this->Image($gURLlogoHD,12,16,25);
+						$this->Image($gEtablissement[$etablissement]['logo_hd'],12,16,25);
 						$decalagelogo=50;
 					}
 				}
@@ -66,7 +43,8 @@
 			$this->Cell($decalagelogo,37,utf8_decode($gNominstitutionelcomplet),0,0,'C');
 
 			// Saut de ligne
-			$this->Ln(20);
+			$this->Ln(20);		
+			
 		}
 
 		// Pied de page
@@ -221,6 +199,37 @@
 	
 	if ($bOK) 
 	{
+		
+		$etablissement="";
+		
+		// on cherche l'établissement à partir de l'uid (@domaine.tld ou code-barres)
+		if(filter_var($uid, FILTER_VALIDATE_EMAIL)) //@domaine.tld
+		{
+			
+			$parts = explode('@', $uid);
+			$domaine=strtolower($parts[1]); // on récupère le domaine
+			if (isset($gDomaine[$domaine]))
+				$etablissement=$gDomaine[$domaine];
+		}
+		else //code-barres
+		{
+			
+			foreach ($gEtablissement as $key => $value){
+
+					if (preg_match($value['cb_regex'], $uid)) 
+					{
+						// la regex match l'uid
+						$etablissement = $key; // on met la clé qui est l'établissment
+						break;
+					}
+					// on teste le suivant
+			}
+	
+		}
+		
+		if ($etablissement=="")
+			$etablissement="default";
+		
 		//on génère le pdf du quitus
 		$pdf = new PDF();
 		$pdf->SetAuthor($gNominstitutionel);
@@ -236,15 +245,37 @@
 		$pdf->Cell(0,50,'QUITUS ',0,1,'C');
 		$pdf->SetFont('Times','',12);
 		
-		//TODO prendre la date du quitus ????
-		$pdf->Cell(0,30,$gURLville.", le ".date("d/m/Y"),0,1,'L');
+		// ajout : "Ville", le "date"
+		if ($etablissement!="")
+		{
+			if (isset($gEtablissement[$etablissement]['ville']))
+			{
+				$pdf->Cell(0,30,utf8_decode($gEtablissement[$etablissement]['ville']).", le ".date("d/m/Y"),0,1,'L');
+			}
+		}
+		else // pas de Ville définit dans config.php
+		{
+			$pdf->Cell(0,30,"Le ".date("d/m/Y"),0,1,'L');
+		}
 		
-		$pdf->MultiCell(180,8,ucfirst(utf8_decode($gLNominstitutionelcomplet))." certifie que M./Mme ".utf8_decode(get_name($xml_user)).", carte lecteur $uid, né/née le ".date("d/m/Y",strtotime(get_birthdate($xml_user))).", a rendu tous les documents qu'il/elle y avait empruntés et est quitte de toute obligation envers la bibliothèque.");
+		$pdf->MultiCell(180,8,ucfirst(utf8_decode($gLNominstitutionelcomplet))." certifie que M./Mme ".utf8_decode(get_name($xml_user)).", identifiant $uid, né/née le ".date("d/m/Y",strtotime(get_birthdate($xml_user))).", a rendu tous les documents qu'il/elle y avait empruntés et est quitte de toute obligation envers la bibliothèque.");
 		
 		$pdf->Cell(0,40,ucfirst(utf8_decode($gLNominstitutionel)),0,1,'C');
-		$pdf->Image($gURLtampon,140,160,35);
 		
-		$pdf->Cell(0,29,'',0,1,'C');
+		// ajout : tampon
+		if ($etablissement!="")
+		{
+			if (isset($gEtablissement[$etablissement]['tampon']))
+			{
+				if (file_exists($gEtablissement[$etablissement]['tampon']))
+				{
+					$pdf->Image($gEtablissement[$etablissement]['tampon'],140,160,35);
+					$decalagelogo=50;
+				}
+			}
+		}
+		
+		$pdf->Cell(0,28,'',0,1,'C');
 
 		$codevalidation = "v-".$codequitus."-".urlsafe_b64encode($uid);
 
@@ -258,9 +289,13 @@
 		$pdf->Image($pngAbsoluteFilePath,9,227,30);
 		
 		$pdf->Cell(0,0,"--------------------------------------- Réservé à l'université de destination ---------------------------------------",0,1,'C');
-		$pdf->Cell(0,14,'Pour vérifier la validité de ce quitus sur le site du '.utf8_decode($gNominstitutionel).', flasher le QR Code suivant :',0,1);
+		// $pdf->Cell(0,4,"",0,1,'C');
 		
-		$pdf->Cell(0,28,'',0,1,'C');
+		// $pdf->Cell(0,14,'Pour vérifier la validité de ce quitus sur le site du '.utf8_decode($gNominstitutionelcomplet).', flasher le QR Code suivant :',0,1);
+		$pdf->Cell(0,14,'Pour vérifier la validité de ce quitus, flasher le QR Code suivant :',0,1);
+		// $pdf->MultiCell(0,6,'Pour vérifier la validité de ce quitus, flasher le QR Code suivant :');
+		
+		$pdf->Cell(0,30,'',0,1,'C');
 		
 		$pdf->Cell(100,5,'Vous pouvez aussi cliquer sur le lien : ',0,1);
 

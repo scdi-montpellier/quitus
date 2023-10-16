@@ -46,7 +46,7 @@
 	
 	echo "  <!-- Font-awesome -->\n";
 	echo "	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' />\n";
-		
+
 	echo "	<!-- styles perso -->\n";
 	echo "  <link rel=\"stylesheet\" href=\"css/sticky-footer-navbar.css\"></link>\n";
 	?>
@@ -101,7 +101,7 @@
 			foreach ($gIdp as $key => $value){
 				if ($value['active'])
 				{
-					echo "<a style='margin-bottom:20px;min-height:40px;".$value['buttoncolor']."' class='btn-block btn btn-dark ttt' data-toggle='tooltip' data-container='body' data-placement='top' data-html='true' title=\"Accéder à l'application via votre compte ENT ".$value['text']."\" href='".$value['url']."'><i class='fa fa-sign-in fa-fw'></i> ".$value['text']."</a>\n";
+					echo "<a style='margin-bottom:20px;min-height:40px;".$value['buttoncolor']."' class='btn-block btn btn-dark ttt' data-toggle='tooltip' data-container='body' data-placement='top' data-html='true' title=\"Accéder à l'application via votre compte ENT ".$value['buttontext']."\" href='".$value['url']."'><i class='fa fa-sign-in fa-fw'></i> ".$value['buttontext']."</a>\n";
 				}
 			}
 

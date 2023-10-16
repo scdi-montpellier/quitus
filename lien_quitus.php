@@ -117,7 +117,7 @@
 					echo "<div class='alert alert-warning' role='alert'>";
 					
 						echo "<div class = 'titre2'><i class='fa fa-info-circle' aria-hidden='true'></i> Votre demande concerne :</div>";
-						echo "<div>- l'identifiant carte lecteur : $uid</div>";
+						echo "<div>- l'identifiant compte carte lecteur : $uid</div>";
 						echo "<div>- dont le porteur a pour date de naissance : ".date("d/m/Y",strtotime($datenaissance))."</div>";
 						
 						$datelimite = strtotime($datelimite);

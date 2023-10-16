@@ -37,7 +37,7 @@
 	
 	
 	if (!$gIdp[$idp]['active'])
-		die("L'authentification via '".$gIdp[$idp]['text']."' n'est pas encore disponible, veuillez utiliser votre numéro de carte lecteur et date de naissance à la place.");
+		die("L'authentification via '".$gIdp[$idp]['text']."' n'est pas encore disponible, veuillez utiliser votre numéro de carte lecteur BU et date de naissance à la place.");
 		
 	require_once($gCheminSSP.'lib/_autoload.php');
 	
@@ -96,14 +96,14 @@
 		// $uid =  $attributes["uid"][0]; 
 
 	// if (trim($uid)=="") // ne doit pas arriver
-		// die ("Erreur d'authentification avec l'IDP, l'attribut uid est retourné vide; Veuillez contacter le service d'assistance de '".$gIdp[$idp]['text']."'.");
+		// die ("Erreur d'authentification avec l'IDP, l'attribut uid est retourné vide; Veuillez contacter le service d'assistance de '".$gIdp[$idp]['buttontext']."'.");
 	
 	// récupération de l'eppn
 	if (isset($attributes["eduPersonPrincipalName"][0])) 
 		$eppn = $attributes["eduPersonPrincipalName"][0];
 
 	if (trim($eppn)=="") // ne doit pas arriver sauf bug serveur IDP
-		die ("Erreur d'authentification avec l'IDP, l'attribut eppn est retourné vide; Veuillez contacter le service d'assistance de '".$gIdp[$idp]['text']."'.");
+		die ("Erreur d'authentification avec l'IDP, l'attribut eppn est retourné vide; Veuillez contacter le service d'assistance de '".$gIdp[$idp]['buttontext']."'.");
 	
 	// if (isset($attributes["mail"][0])) // ne sert pas, on utilise le mail du compte lecteur
 		// $mail = strtolower($attributes["mail"][0]);

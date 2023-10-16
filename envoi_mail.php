@@ -102,7 +102,7 @@
 									$mail->isHTML(true);                                  // Set email format to HTML
 									$mail->Subject  = 'Accéder à votre quitus';
 									$mail->Body     = "Bonjour $nomdemande,<br/><br/>";
-									$mail->Body    .= "Vous venez de faire une demande de quitus au ".$gNominstitutionel.".<br/><br/>";
+									$mail->Body    .= "Vous venez de faire une demande de quitus au ".$gNominstitutionelcomplet.".<br/><br/>";
 									$mail->Body    .= "Veuillez cliquer sur le lien suivant pour récupérer votre quitus :<br/>";
 									$mail->Body    .= "<a target='_blank' href='$lien'>$lien</a><br/><br/>";
 									$mail->Body    .= "Si le lien ne s'ouvre pas, veuillez copier/coller le lien dans votre navigateur.<br/>";
@@ -112,7 +112,7 @@
 									$mail->Body    .= ucfirst($gLNominstitutionel)."<br/>";
 									
 									$mail->AltBody  = "Bonjour $nomdemande,\n\n";
-									$mail->AltBody .= "Vous venez de faire une demande de quitus au ".$gNominstitutionel.".\n\n";
+									$mail->AltBody .= "Vous venez de faire une demande de quitus au ".$gNominstitutionelcomplet.".\n\n";
 									$mail->AltBody .= "Veuillez cliquer sur le lien suivant pour récupérer votre quitus :\n";
 									$mail->AltBody .= "$lien\n\n";
 									$mail->AltBody .= "Si le lien ne s'ouvre pas, veuillez copier/coller le lien dans votre navigateur.\n\n";
