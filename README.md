@@ -1,4 +1,4 @@
-# Quitus Alma SCDI
+# Quitus Alma SCDI v1.3
 **Quitus Alma SCDI** est une application écrite en PHP/JS/CSS qui permet de générer un Quitus en PDF et de bloquer l'utilisateur dans l'application Alma Exlibris.
 
 ## Fonctionnement de l'application
@@ -31,16 +31,16 @@ Les interactions entre l'application Quitus et Alma sont faites à travers l'API
 - Copier tous les fichiers de l'application dans le répertoire root d'apache
 - Modifier le fichier config.php pour paramètrer/personnaliser l'application (chemin, url, titre, logo, serveur base de données, token Alma, serveur smtp, serveurs IDP SAML...) : voir exemple fourni
 - Importer le script quitus.sql sur votre serveur MariaDB pour créer la base et la table nécessaire à l'application (attention à bien mettre les bons droits utilisateur). Supprimer le fichier quitus.sql du serveur.
-- Copier vos logos en png dans le dossier /images et /images/logo_hd -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png - Mettre des logos de taille comparable aux exemples fournis (l'appli de redimensionne pas la taille des logos)
+- Copier vos logos en png dans le dossier /images/logo_hd et tampons en png dans le dossier /images/tampon -> respecter la nomenclature : nomdomaine.tld.png du compte universitaire/attribut eppn et/ou prefixe_identifiant_alma.png - Mettre des logos de taille comparable aux exemples fournis (l'appli de redimensionne pas la taille des logos)
 - Créer un dossier /temp à la racine du site pour la gestion des fichiers temporaires (l'utilisateur apache doit pouvoir écrire dans le dossier)
 - Téléchager fpdf et copier les fichiers dans un dossier /fpdf à la racine du site (nom dossier en dur dans le code)
 - Téléchager phpqrcode et copier les fichiers dans un dossier /phpqrcode à la racine du site (nom dossier en dur dans le code)
 - Téléchager PHPMailer et copier les fichiers dans un dossier /PHPMailer à la racine du site (nom dossier en dur dans le code)
-- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis l'interface SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php. L'attribut eppn retourné par shibboleth doit être un identifiant utilisateur dans alma).
+- Téléchager et installer SimpleSAMLPHP, configurer un SP dans l'application et tester que l'authentification fonctionne bien depuis l'interface SimpleSAMLPHP (il faut renseigner le chemin vers SimpleSAMLPHP et le nom du SP dans config.php. L'attribut eppn retourné par shibboleth doit être un identifiant utilisateur dans Alma).
 
 ## Notes
 - Application en français uniquement pour le moment
-- Plusieurs serveurs IDP Shibboleth peuvent être utilisés pour l'authentification des utilisateurs (voir fichier config.php)
+- Plusieurs serveurs IDP Shibboleth peuvent être utilisés pour l'authentification des utilisateurs (voir fichier exemple config.php)
 - Il n'est pas possible de configurer le port (par défaut : tcp/25), le chiffrement (par défaut : sans) et l'authentification (par défaut : sans) pour le serveur SMTP à utiliser directement dans config.php
 
 ## Licence
