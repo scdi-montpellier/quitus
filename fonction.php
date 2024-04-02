@@ -249,7 +249,8 @@ function get_mail_preferred($xml,$mask=true)
     {	
 		$ligne = "";
 		
-		foreach ($xml->contact_info->emails->email as $emailinfo):
+		foreach ($xml->contact_info->emails->email as $emailinfo)
+		{
 			
 			if ($emailinfo['preferred']=="true")
 				if ($mask)
@@ -257,7 +258,7 @@ function get_mail_preferred($xml,$mask=true)
 				else
 					$ligne = $emailinfo->email_address;
 			
-		endforeach;
+		}
 		
 		return $ligne;
     }
@@ -283,7 +284,8 @@ function get_mails($xml,$exlure_mail_pref=true,$mask=true)
     {	
 		$ligne = "";
 		
-		foreach ($xml->contact_info->emails->email as $emailinfo):
+		foreach ($xml->contact_info->emails->email as $emailinfo)
+		{
 			if (!$exlure_mail_pref && $emailinfo['preferred']=="true") {
 				$pref="";
 				if ($emailinfo['preferred']=="true")
@@ -303,7 +305,7 @@ function get_mails($xml,$exlure_mail_pref=true,$mask=true)
 					$ligne .= $emailinfo->email_address;
 				$ligne .= ", ";
 			}
-		endforeach;
+		}
 		
 		$ligne = substr($ligne,0,-2);
 		
@@ -314,7 +316,8 @@ function get_blocks($xml, $activeonly = true)
 	{
 		$ligne = "";
 		$cpt=0;
-		foreach ($xml->user_blocks->user_block as $blockinfo):
+		foreach ($xml->user_blocks->user_block as $blockinfo)
+		{
 			if (!$activeonly || strtoupper($blockinfo->block_status)=="ACTIVE") 
 			{
 				$cpt++;
@@ -331,7 +334,7 @@ function get_blocks($xml, $activeonly = true)
 				$ligne .= "</li>";
 				
 			}
-		endforeach;
+		}
 		
 		if ($ligne!="")
 			$ligne = "<ul>$ligne</ul>";
@@ -354,7 +357,9 @@ function add_quitus($xml, $url, $uid, $gTokenAlma, $codequitus)
 			$block_type = $user_block->addChild('block_type', 'GENERAL');
 				$block_type->addAttribute('desc', "Général");
 			$block_description = $user_block->addChild('block_description', '07-LOCAL');
-				$block_description->addAttribute('desc', "Quitus(LOCAL)");
+				// 02/04/2024 - changement description du quitus pour aller avec les valeurs qui seraient mises en passant par alma
+				// $block_description->addAttribute('desc', "Quitus(LOCAL)");
+				$block_description->addAttribute('desc', "Quitus");
 			$user_block->addChild('block_status', 'ACTIVE');
 			$user_block->addChild('block_note', $gTagblocage.' ['.$codequitus.']');
 			$user_block->addChild('created_by', $gTagblocage);
@@ -389,16 +394,17 @@ function add_quitus($xml, $url, $uid, $gTokenAlma, $codequitus)
 			
 			if ($responsexml != false) // si y a pas d'erreur
 			{	
+				// 02/04/2024 - pb avec la fonction de validation de quitus
 				if (has_quitus_valide($responsexml,$codequitus) == $codequitus) // on vérifie si le quitus codequitus est bien crée
 				{
 					$bOK = true;
 					$codequitustrouve = $codequitus;
 				}
 				else // on ne devrait jamais passer ici
-					$message = "Impossible de retrouver le quitus '$codequitus' qui a &eacute;t&eacute; cr&eacute;&eacute; dans le syst&egrave;me - Erreur Alma / utilisateur<br/><i class='fa fa-info-circle' aria-hidden='true'></i> Veuillez contacter votre bibliothèque.";
+					$message = "Code 1 - Impossible de retrouver le quitus '$codequitus' qui a &eacute;t&eacute; cr&eacute;&eacute; dans le syst&egrave;me - Erreur Alma / utilisateur<br/><i class='fa fa-info-circle' aria-hidden='true'></i> Veuillez contacter votre bibliothèque.";
 			}
 			else // on ne devrait jamais passer ici
-				$message  = "Impossible de cr&eacute;er le quitus dans le syst&egrave;me - Erreur Alma / utilisateur".get_error_alma_xml_from_string($response)."<i class='fa fa-info-circle' aria-hidden='true'></i> Veuillez contacter votre bibliothèque.";
+				$message  = "Code 2 - Impossible de cr&eacute;er le quitus dans le syst&egrave;me - Erreur Alma / utilisateur".get_error_alma_xml_from_string($response)."<i class='fa fa-info-circle' aria-hidden='true'></i> Veuillez contacter votre bibliothèque.";
 		}
 		else // on a trouvé un autre quitus fait par l'appli quitus, on utilise celui-ci
 			$bOK = true;
@@ -413,7 +419,8 @@ function add_quitus($xml, $url, $uid, $gTokenAlma, $codequitus)
 function sum_blocks($xml, $activeonly = true)
 	{ // compte le nombre de blocage ACTIF (défaut) ou NON
 		$cpt=0;
-		foreach ($xml->user_blocks->user_block as $blockinfo):
+		foreach ($xml->user_blocks->user_block as $blockinfo)
+		{
 			if ($activeonly)
 			{
 				if (strtoupper($blockinfo->block_status)=="ACTIVE") 
@@ -445,7 +452,7 @@ function sum_blocks($xml, $activeonly = true)
 			{
 				$cpt++;
 			}
-		endforeach;
+		}
 		
 		return $cpt;
 	}
@@ -463,12 +470,14 @@ function get_quitus($xml, $activeonly = true)
 		// retourne les quitus de l'utilisateur
 		$ligne = "";
 
-		foreach ($xml->user_blocks->user_block as $blockinfo):
+		foreach ($xml->user_blocks->user_block as $blockinfo)
+		{
 			if (!$activeonly || strtoupper($blockinfo->block_status)=="ACTIVE") 
 			{
 				if (strtoupper($blockinfo->block_type) == "GENERAL" &&
 					strtoupper($blockinfo->block_description) == "07-LOCAL" &&
-					strtoupper($blockinfo->block_description['desc']) == "QUITUS(LOCAL)")
+					// strtoupper($blockinfo->block_description['desc']) == "QUITUS(LOCAL)")
+					strtoupper($blockinfo->block_description['desc']) == "QUITUS")
 					{
 						$bDate = true;
 						
@@ -495,7 +504,7 @@ function get_quitus($xml, $activeonly = true)
 						}
 					}
 			}
-		endforeach;
+		}
 		
 		if ($ligne!="")
 			$ligne = "<ul>$ligne</ul>";
@@ -507,12 +516,13 @@ function get_nb_quitus($xml, $activeonly = true)
 		// retourne le nombre de quitus de l'utilisateur
 		$cpt=0;
 		
-		foreach ($xml->user_blocks->user_block as $blockinfo):
+		foreach ($xml->user_blocks->user_block as $blockinfo)
+		{
 			if (!$activeonly || strtoupper($blockinfo->block_status)=="ACTIVE") 
 			{
 				if (strtoupper($blockinfo->block_type) == "GENERAL" &&
 					strtoupper($blockinfo->block_description) == "07-LOCAL" &&
-					strtoupper($blockinfo->block_description['desc']) == "QUITUS(LOCAL)")
+					strtoupper($blockinfo->block_description['desc']) == "QUITUS")
 					{
 						$bDate = true;
 						
@@ -527,7 +537,7 @@ function get_nb_quitus($xml, $activeonly = true)
 						}
 					}
 			}
-		endforeach;
+		}
 
 		return $cpt;
 	}
@@ -539,21 +549,28 @@ function has_quitus_valide($xml, $codequitus = "")
 		// retourne le 1er codequitus crée par l'appli quitus, 
 		// sinon retourne le code quitus recherché
 		// retourne chaine vide si aucun quitus Appli quitus trouvé
-		
+	
 		global $gTagblocage;
 		
 		$bOK=false;
 		$codequitustrouve="";
 		$codequitus = strtoupper($codequitus);
 		
-		foreach ($xml->user_blocks->user_block as $blockinfo):
+		$cptquitus = 0;
+		
+		foreach ($xml->user_blocks->user_block as $blockinfo)
+		{
+			
 			// on boucle sur les blocages
 			if (strtoupper($blockinfo->block_status)=="ACTIVE") 
 			{// on boucle sur les blocages actifs
+				
 				if (strtoupper($blockinfo->block_type) == "GENERAL" &&
 					strtoupper($blockinfo->block_description) == "07-LOCAL" &&
-					strtoupper($blockinfo->block_description['desc']) == "QUITUS(LOCAL)")
+					strtoupper($blockinfo->block_description['desc']) == "QUITUS")
 					{
+						$cptquitus++;
+						
 						// on boucle sur les blocages actifs qui sont des quitus
 						
 						$bDate = true;
@@ -589,8 +606,8 @@ function has_quitus_valide($xml, $codequitus = "")
 			
 			if ($codequitustrouve != "") // si on a trouvé le quitus, on sort directement
 				return $codequitustrouve;
-			
-		endforeach;
+		}
+		// endforeach;
 		
 		return $codequitustrouve;
 	}

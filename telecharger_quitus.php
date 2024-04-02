@@ -157,7 +157,7 @@
 				
 				$url_fees = "$gAdrAlma/almaws/v1/users/$uid/fees?user_id_type=all_unique&status=ACTIVE&apikey=$gTokenAlma&lang=fr";
 				$xml_fees = get_xml($url_fees);
-				if ($xml_loans==false)
+				if ($xml_fees==false)
 					$bOK = false;
 				
 				if ($bOK)

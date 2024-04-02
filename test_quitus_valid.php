@@ -71,7 +71,7 @@
 			$datenaissance = date("d/m/Y",strtotime(get_birthdate($xml)));
 			$datejour = date("d/m/Y \à H:i:s",strtotime("now"));
 			
-			// on vérifie que compte à toujours un quitus et que donc le quitus est toujours valide.
+			// on vérifie que le compte à toujours un quitus et que donc le quitus est toujours valide.
 			$validation = has_quitus_valide($xml,$codequitus);
 			
 			if ($validation=="")
